@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  # Define the name of the ROS container
+  ros1_ns_service:
+    # Use the Dockerfile in the same directory to build the container
+    build:
+      context: .
+      dockerfile: DockerfileMac
+    # Set the image name and tag
+    image: ros1_ns_driver:latest
+    # Set the container name
+    container_name: ros1_ns_container
+    # Uncomment and set user and group ID or name if needed
+    # user: "1000:1000"
+    # Use the host network for networking (no need to expose ports)
+    network_mode: "host"
+    # Enable privileged mode to access host devices (e.g., USB ports)
+    privileged: true
+    # Define volumes for sharing directories between host and container
+    volumes:
+      - ../src:/root/ros_ws/src
+    # Enable TTY for displaying GUIs
+    tty: true
+    # Define environment variables passed to the container
+    environment:
+      - DISPLAY
+    # Set the entrypoint to keep the container running
+    entrypoint: ["tail", "-f", "/dev/null"]

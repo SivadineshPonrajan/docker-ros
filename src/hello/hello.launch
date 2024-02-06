@@ -1,0 +1,4 @@
+<launch>
+  <env name="ROS_MASTER_URI" value="http://localhost:11311"/>
+  <node name="hello_node" pkg="hello" type="hello_node.py" output="screen"/>
+</launch>
