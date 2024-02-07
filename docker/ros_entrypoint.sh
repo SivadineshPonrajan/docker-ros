@@ -15,6 +15,7 @@ source "/root/ros_ws/devel/setup.bash"
 # roslaunch /root/ros_ws/src/start.launch # <== change to your launch file // comment out if you don't want auto launch
 
 echo "Getting started"
+
 roslaunch hello hello.launch
 
 exec "$@"
