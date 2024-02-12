@@ -27,6 +27,11 @@ RUN echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc
     && apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 \
     && chmod 644 /etc/apt/sources.list.d/ros-latest.list
 
+# Add Gazebo repository and key
+RUN echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -sc) main" > /etc/apt/sources.list.d/gazebo-latest.list \
+    && apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key D2486D2DD83DB69272AFE98867170598AF249743 \
+    && chmod 644 /etc/apt/sources.list.d/gazebo-latest.list
+
 # Install essential tools, libraries, and ROS dependencies
 RUN apt-get update && apt-get install --no-install-recommends -y \
         build-essential \
@@ -44,7 +49,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
         ros-noetic-rqt \
         ros-noetic-rqt-common-plugins \
         ros-noetic-desktop-full \
+        gazebo11 \
+        ros-noetic-gazebo-ros-pkgs \
+        ros-noetic-gazebo-ros-control \
         python3-rosdep \
+        firefox \
         libyaml-cpp-dev \
         libpcap-dev \
     && apt-get clean \ 
