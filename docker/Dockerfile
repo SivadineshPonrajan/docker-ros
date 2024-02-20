@@ -1,6 +1,3 @@
-ARG OS_VERSION=20.04
-ARG USER_ID=1000
-
 # Use Ubuntu 20.04 as the base image
 FROM ubuntu:20.04
 
@@ -42,6 +39,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
         nano \
         curl \
         wget \
+        net-tools \
         libgl1-mesa-dev \
         libglu1-mesa-dev \
         x11-apps \
@@ -66,7 +64,7 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> /root/.bashrc
 RUN rosdep init && rosdep update --rosdistro $ROS_DISTRO
 
 # Copy the ros_entrypoint.sh script from ros:ros-base
-COPY ros_entrypoint.sh /
+COPY Docker/ros_entrypoint.sh /
 RUN chmod +x /ros_entrypoint.sh
 
 # Set the ros_entrypoint.sh script as the entry point for the container
